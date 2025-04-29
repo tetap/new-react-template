@@ -4,7 +4,7 @@ export default function Dashboard() {
   const { t } = useTranslation()
   return (
     <>
-      <div>{t('title')}</div>
+      <div className="text-xl">{t('title')}</div>
     </>
   )
 }
