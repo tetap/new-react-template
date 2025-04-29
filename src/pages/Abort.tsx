@@ -5,8 +5,8 @@ export default function Dashboard() {
   const { t } = useTranslation()
   return (
     <>
-      <div className="text-xl">{t('title')}</div>
-      <Link to={{ pathname: '/abort' }}>to abort</Link>
+      <div className="text-xl">Abort</div>
+      <Link to={{ pathname: '/' }}>to home</Link>
     </>
   )
 }

@@ -1,11 +1,17 @@
 import { RouteObject, useRoutes } from 'react-router-dom'
+import { lazyComponent } from './lazyComponent'
 
-const libs: any = import.meta.glob('./libs/*.ts', { eager: true })
+const routes: RouteObject[] = [
+  {
+    path: '/',
+    element: lazyComponent(() => import('@/pages/Dashboard'))
+  },
+  {
+    path: '/abort',
+    element: lazyComponent(() => import('@/pages/Abort'))
+  }
+]
 
-const routes: RouteObject[] = []
-for (const lib in libs) {
-  routes.push(...libs[lib].default)
-}
 export default function () {
   return useRoutes(routes)
 }
