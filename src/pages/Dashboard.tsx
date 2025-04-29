@@ -1,12 +1,10 @@
-import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 export default function Dashboard() {
-  const { t } = useTranslation()
   return (
     <>
-      <div className="text-xl">{t('title')}</div>
-      <Link to={{ pathname: '/abort' }}>to abort</Link>
+      <div className="text-xl">Home</div>
+      <Outlet />
     </>
   )
 }

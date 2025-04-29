@@ -1,7 +1,7 @@
-import routes from '@/router'
+import Routes from '@/router'
 
 function App() {
-  return <>{routes()}</>
+  return <Routes auth={''} />
 }
 
 export default App
