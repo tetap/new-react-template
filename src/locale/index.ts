@@ -5,7 +5,7 @@ import { initReactI18next } from 'react-i18next'
 import enUS from './langs/en-us.json'
 import zhCN from './langs/zh-cn.json'
 
-function useLocale() {
+export function useLocale() {
   i18n
     .use(Backend)
     .use(LanguageDetector) //嗅探当前浏览器语言
@@ -28,5 +28,3 @@ function useLocale() {
       }
     })
 }
-
-export { useLocale }
