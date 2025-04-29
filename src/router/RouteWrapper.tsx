@@ -32,7 +32,7 @@ const RouteWrapper = (props: any) => {
     return merge
   }
   return (
-    <DocumentTitle title={route.title}>
+    <DocumentTitle title={route.title ?? 'test'}>
       <Comp {...mergeQueryToProps()} />
     </DocumentTitle>
   )

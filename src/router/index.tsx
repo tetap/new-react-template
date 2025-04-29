@@ -37,7 +37,7 @@ const CRouter = (props: CRouterProps) => {
     const route = (r: IFMenuBase) => {
       const component = r.component
       if (!component) return <></>
-      const Component = component && lazyComponent(AllComponents[component])
+      const Component = lazyComponent(AllComponents[component])
       const wrapper = <RouteWrapper {...{ ...props, Comp: Component, route: r }} />
       const element = r.login ? wrapper : requireLogin(wrapper, r.requireAuth)
       if (element instanceof Response) {
@@ -53,11 +53,12 @@ const CRouter = (props: CRouterProps) => {
   }
   const createRoute = (key: string) => routesConfig[key].map(createMenu)
   const getAsyncMenus = () => umbrella.getLocalStorage('smenus') || []
+  console.log(routesConfig)
   return (
     <Routes>
+      <Route path="/" index element={<Navigate to={routesConfig.menus[0].key} replace />} />
       {Object.keys(routesConfig).map((key) => createRoute(key))}
       {getAsyncMenus().map(createMenu)}
-      <Route path="/" element={<Navigate to={routesConfig.menus[0].key} replace />} />
       <Route path="login" element={lazyComponent(AllComponents['Login'])} />
       <Route path="not-found" element={lazyComponent(AllComponents['NotFound'])} />
       <Route path="*" element={<Navigate to="/not-found" replace />} />
