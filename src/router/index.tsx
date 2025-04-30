@@ -9,7 +9,6 @@ import { checkLogin } from '../utils'
 import RouteWrapper from './RouteWrapper'
 import { lazyComponent } from './lazyComponent'
 import AllComponents from '../pages'
-import type { Location } from 'react-router-dom'
 
 type CRouterProps = {
   auth: any
