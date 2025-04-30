@@ -1,41 +1,17 @@
-import { useMemo } from 'react'
-import DocumentTitle from 'react-document-title'
-import queryString from 'query-string'
+import { useEffect } from 'react'
 
 const RouteWrapper = (props: any) => {
-  // eslint-disable-next-line prefer-const
-  let { Comp, route, ...restProps } = props
-  /** useMemo 缓存query，避免每次生成生的query */
-  const queryMemo = useMemo(() => {
-    const queryReg = /\?\S*/g
-    const matchQuery = (reg: RegExp) => {
-      const queryParams = restProps.location.search.match(reg)
-      return queryParams ? queryParams[0] : '{}'
+  const { Comp, route } = props
+  useEffect(() => {
+    const title = route.title
+    const originalTitle = document.title
+    document.title = title
+    return () => {
+      document.title = originalTitle
     }
-    return queryString.parse(matchQuery(queryReg))
-  }, [restProps.location.search])
-  const mergeQueryToProps = () => {
-    const queryReg = /\?\S*/g
-    const removeQueryInRouter = (restProps: any, reg: RegExp) => {
-      const { params } = restProps.match
-      Object.keys(params).forEach((key) => {
-        params[key] = params[key] && params[key].replace(reg, '')
-      })
-      restProps.match.params = { ...params }
-    }
+  }, [route])
 
-    restProps = removeQueryInRouter(restProps, queryReg)
-    const merge = {
-      ...restProps,
-      query: queryMemo
-    }
-    return merge
-  }
-  return (
-    <DocumentTitle title={route.title ?? 'test'}>
-      <Comp {...mergeQueryToProps()} />
-    </DocumentTitle>
-  )
+  return <>{Comp}</>
 }
 
 export default RouteWrapper

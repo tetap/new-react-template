@@ -1,9 +1,7 @@
 import Routes from '@/router'
-import { useLocation } from 'react-router-dom'
 
 function App() {
-  const location = useLocation()
-  return <Routes auth={''} location={location} match={{ params: {} }} />
+  return <Routes auth={''} />
 }
 
 export default App
